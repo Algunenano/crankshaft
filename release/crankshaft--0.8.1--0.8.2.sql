@@ -4,7 +4,7 @@
 -- Version number of the extension release
 CREATE OR REPLACE FUNCTION cdb_crankshaft_version()
 RETURNS text AS $$
-  SELECT '0.8.1'::text;
+  SELECT '0.8.2'::text;
 $$ language 'sql' IMMUTABLE STRICT PARALLEL SAFE;
 
 -- Internal identifier of the installed extension instence
@@ -1054,6 +1054,7 @@ BEGIN
     END IF;
 END
 $$ LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE;
+
 
 -- Create aggregate if it did not exist
 DO $$ BEGIN
