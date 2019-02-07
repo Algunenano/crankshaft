@@ -50,10 +50,10 @@ EOF
 
 
 # Check PG version
-PG_VERSION=`psql -U postgres -q -t -c "SELECT current_setting('server_version_num')"`
+PG_VERSION=`psql -q -t -c "SELECT current_setting('server_version_num')"`
 
 # Save public function signatures
-if [[ $PG_VERSION -le 110000 ]]; then
+if [[ "$PG_VERSION" -lt 110000 ]]; then
     psql $DBNAME -c "
     CREATE TABLE release_function_signatures AS
     SELECT
@@ -99,7 +99,7 @@ sudo make install || die "Could not deploy current dev branch"
 # Check it can be upgraded
 psql $DBNAME -c "ALTER EXTENSION crankshaft update to 'dev';" || die "Cannot upgrade to dev version"
 
-if [[ $PG_VERSION -le 110000 ]]; then
+if [[ $PG_VERSION -lt 110000 ]]; then
     psql $DBNAME -c "
     CREATE TABLE dev_function_signatures AS
         SELECT  p.proname as name,
