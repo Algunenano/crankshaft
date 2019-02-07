@@ -28,7 +28,7 @@ before_install:
   - sudo pg_createcluster -u postgres $POSTGRESQL_VERSION main -- -A trust
   - sudo /etc/init.d/postgresql start $POSTGRESQL_VERSION || sudo journalctl -xe
 
-  - sudo apt-get -y install python-pip python-software-properties python-joblib python-numpy python-scipy python-sklearn python-scikits-learn
+  - sudo apt-get -y install python-pip python-software-properties python-joblib
 
 install:
   - sudo make install
